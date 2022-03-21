@@ -45,7 +45,7 @@ public interface QbtMetrics {
 
     void setTorrentSizeBytes(String name, double value);
 
-    void setTorrentInfo(Torrent torrent);
+    // void setTorrentInfo(Torrent torrent);
 
     void setTorrentSessionDownloadedBytes(String name, double value);
 
@@ -53,7 +53,7 @@ public interface QbtMetrics {
 
     void setTorrentTotalDownloadedBytes(String name, double value);
 
-    void setTorrentTotalUploadedBytes(String name, double value);
+    void setTorrentTotalUploadedBytes(String name, String tracker, double value);
 
     void setGlobalAlltimeDownloadedBytes(double value);
 

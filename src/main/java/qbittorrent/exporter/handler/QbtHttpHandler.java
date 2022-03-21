@@ -65,7 +65,7 @@ public class QbtHttpHandler implements HttpHandler {
                 collector.setTorrentUploadSpeedBytes(torrent.getName(), torrent.getUploadSpeed());
                 collector.setTorrentTotalDownloadedBytes(torrent.getName(), torrent.getDownloaded());
                 collector.setTorrentSessionDownloadedBytes(torrent.getName(), torrent.getDownloadedSession());
-                collector.setTorrentTotalUploadedBytes(torrent.getName(), torrent.getUploaded());
+                collector.setTorrentTotalUploadedBytes(torrent.getName(), torrent.getTracker(), torrent.getUploaded());
                 collector.setTorrentSessionUploadedBytes(torrent.getName(), torrent.getUploadedSession());
                 collector.setTorrentEta(torrent.getName(), torrent.getEta());
                 collector.setTorrentProgress(torrent.getName(), torrent.getProgress());
@@ -75,7 +75,7 @@ public class QbtHttpHandler implements HttpHandler {
                 collector.setTorrentRatio(torrent.getName(), torrent.getRatio());
                 collector.setTorrentAmountLeftBytes(torrent.getName(), torrent.getAmountLeft());
                 collector.setTorrentSizeBytes(torrent.getName(), torrent.getSize());
-                collector.setTorrentInfo(torrent);
+                // collector.setTorrentInfo(torrent);
             }
 
             final List<String> states = torrents.stream().map(Torrent::getState).distinct().toList();

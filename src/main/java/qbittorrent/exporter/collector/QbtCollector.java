@@ -129,29 +129,29 @@ public class QbtCollector extends Collector implements QbtMetrics {
         .help("The size for each torrent (in bytes)")
         .create();
 
-    private final Gauge torrentInfo = Gauge.build()
-        .name(GAUGE_NAME_PREFIX + "torrent_info")
-        .labelNames(
-            "name",
-            "state",
-            "size",
-            "progress",
-            "seeders",
-            "leechers",
-            "dl_speed",
-            "up_speed",
-            "amount_left",
-            "time_active",
-            "eta",
-            "uploaded",
-            "uploaded_session",
-            "downloaded",
-            "downloaded_session",
-            "max_ratio",
-            "ratio"
-        )
-        .help("All info for torrents")
-        .create();
+    // private final Gauge torrentInfo = Gauge.build()
+    //     .name(GAUGE_NAME_PREFIX + "torrent_info")
+    //     .labelNames(
+    //         "name",
+    //         "state",
+    //         "size",
+    //         "progress",
+    //         "seeders",
+    //         "leechers",
+    //         "dl_speed",
+    //         "up_speed",
+    //         "amount_left",
+    //         "time_active",
+    //         "eta",
+    //         "uploaded",
+    //         "uploaded_session",
+    //         "downloaded",
+    //         "downloaded_session",
+    //         "max_ratio",
+    //         "ratio"
+    //     )
+    //     .help("All info for torrents")
+    //     .create();
 
     private final Gauge torrentSessionUploadedBytes = Gauge.build()
         .name(GAUGE_NAME_PREFIX + "torrent_session_uploaded_bytes")
@@ -173,7 +173,7 @@ public class QbtCollector extends Collector implements QbtMetrics {
 
     private final Gauge torrentTotalUploadedBytes = Gauge.build()
         .name(GAUGE_NAME_PREFIX + "torrent_total_uploaded_bytes")
-        .labelNames("name")
+        .labelNames("name", "tracker")
         .help("The current total upload amount of torrents (in bytes)")
         .create();
 
@@ -237,7 +237,7 @@ public class QbtCollector extends Collector implements QbtMetrics {
             torrentRatio,
             torrentAmountLeftBytes,
             torrentSizeBytes,
-            torrentInfo,
+            // torrentInfo,
             torrentSessionDownloadedBytes,
             torrentSessionUploadedBytes,
             torrentTotalDownloadedBytes,
@@ -339,28 +339,28 @@ public class QbtCollector extends Collector implements QbtMetrics {
         torrentSizeBytes.labels(name).set(value);
     }
 
-    @Override
-    public void setTorrentInfo(Torrent torrent) {
-        torrentInfo.labels(
-            torrent.getName(),
-            torrent.getState(),
-            String.valueOf(torrent.getSize()),
-            String.valueOf(torrent.getProgress()),
-            String.valueOf(torrent.getNumSeeds()),
-            String.valueOf(torrent.getNumLeechs()),
-            String.valueOf(torrent.getDownloadSpeed()),
-            String.valueOf(torrent.getUploadSpeed()),
-            String.valueOf(torrent.getAmountLeft()),
-            String.valueOf(torrent.getTimeActive()),
-            String.valueOf(torrent.getEta()),
-            String.valueOf(torrent.getUploaded()),
-            String.valueOf(torrent.getUploadedSession()),
-            String.valueOf(torrent.getDownloaded()),
-            String.valueOf(torrent.getDownloadedSession()),
-            String.valueOf(torrent.getMaxRatio()),
-            String.valueOf(torrent.getRatio())
-        ).set(1);
-    }
+    // @Override
+    // public void setTorrentInfo(Torrent torrent) {
+    //     torrentInfo.labels(
+    //         torrent.getName(),
+    //         torrent.getState(),
+    //         String.valueOf(torrent.getSize()),
+    //         String.valueOf(torrent.getProgress()),
+    //         String.valueOf(torrent.getNumSeeds()),
+    //         String.valueOf(torrent.getNumLeechs()),
+    //         String.valueOf(torrent.getDownloadSpeed()),
+    //         String.valueOf(torrent.getUploadSpeed()),
+    //         String.valueOf(torrent.getAmountLeft()),
+    //         String.valueOf(torrent.getTimeActive()),
+    //         String.valueOf(torrent.getEta()),
+    //         String.valueOf(torrent.getUploaded()),
+    //         String.valueOf(torrent.getUploadedSession()),
+    //         String.valueOf(torrent.getDownloaded()),
+    //         String.valueOf(torrent.getDownloadedSession()),
+    //         String.valueOf(torrent.getMaxRatio()),
+    //         String.valueOf(torrent.getRatio())
+    //     ).set(1);
+    // }
 
     @Override
     public void setTorrentSessionDownloadedBytes(String name, double value) {
@@ -378,8 +378,8 @@ public class QbtCollector extends Collector implements QbtMetrics {
     }
 
     @Override
-    public void setTorrentTotalUploadedBytes(String name, double value) {
-        torrentTotalUploadedBytes.labels(name).set(value);
+    public void setTorrentTotalUploadedBytes(String name, String tracker, double value) {
+        torrentTotalUploadedBytes.labels(name, tracker).set(value);
     }
 
     @Override
