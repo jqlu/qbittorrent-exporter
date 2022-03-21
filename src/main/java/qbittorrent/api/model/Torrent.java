@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.regex.Pattern;
 
 public class Torrent {
-    private Pattern trackerPattern = Pattern.compile("https?://([^/]+)/.*");
+    private Pattern trackerPattern = Pattern.compile("https?:\/\/([^/]+)\/.*");
 
     @SerializedName("amount_left")
     private long amountLeft;
