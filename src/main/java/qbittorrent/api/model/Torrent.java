@@ -2,9 +2,10 @@ package qbittorrent.api.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher
 
 public class Torrent {
-    private Pattern trackerPattern = Pattern.compile("https?:\\/\\/([^/]+)\\/.*");
+    private static Pattern trackerPattern = Pattern.compile("https?:\\/\\/([^/]+)\\/.*");
 
     @SerializedName("amount_left")
     private long amountLeft;
@@ -264,7 +265,11 @@ public class Torrent {
     }
 
     public String getTrackerDomain() {
-        return trackerPattern.matcher(this.tracker).group(0);
+        Matcher m = trackerPattern.matcher(this.tracker);
+        if (m.find()) {
+            return m.group(1);
+        }
+        return "";
     }
 
     public long getUploaded() {
