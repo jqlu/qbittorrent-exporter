@@ -27,7 +27,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: caseyscarborough/qbittorrent-exporter
+          images: wonderror/qbittorrent-exporter
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
