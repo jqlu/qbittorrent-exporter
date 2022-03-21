@@ -2,7 +2,7 @@ package qbittorrent.api.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher
+import java.util.regex.Matcher;
 
 public class Torrent {
     private static Pattern trackerPattern = Pattern.compile("https?:\\/\\/([^/]+)\\/.*");
